@@ -1,7 +1,7 @@
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
-/******/ 	var installedModules = require('../../../ssr-module-cache.js');
+/******/ 	var installedModules = require('../../../../ssr-module-cache.js');
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -88,15 +88,15 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./pages/index.tsx":
-/*!*************************!*\
-  !*** ./pages/index.tsx ***!
-  \*************************/
+/***/ "./pages/user/login.tsx":
+/*!******************************!*\
+  !*** ./pages/user/login.tsx ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -107,9 +107,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_services_player__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src/services/player */ "./src/services/player.ts");
+/* harmony import */ var _src_services_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/services/auth */ "./src/services/auth.ts");
+/* harmony import */ var _src_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../src/rxjs-operators */ "./src/rxjs-operators/index.ts");
 
-var _jsxFileName = "/home/michele/battlebuddygg-front/pages/index.tsx";
+var _jsxFileName = "/home/michele/battlebuddygg-front/pages/user/login.tsx";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -138,6 +139,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var Index =
 /*#__PURE__*/
 function (_React$Component) {
@@ -149,21 +151,13 @@ function (_React$Component) {
       var _getInitialProps = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var player;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _src_services_player__WEBPACK_IMPORTED_MODULE_2__["default"].get();
+                return _context.abrupt("return", {});
 
-              case 2:
-                player = _context.sent;
-                return _context.abrupt("return", {
-                  player: player
-                });
-
-              case 4:
+              case 1:
               case "end":
                 return _context.stop();
             }
@@ -188,111 +182,187 @@ function (_React$Component) {
       return typeof window !== 'undefined' && window.document ? 'client' : 'server';
     });
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "submit", function () {
+      _src_services_auth__WEBPACK_IMPORTED_MODULE_2__["default"].login(_this.state.email, _this.state.password).pipe(_src_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["default"].switchMap(function () {
+        return _src_services_auth__WEBPACK_IMPORTED_MODULE_2__["default"].isAuthenticated();
+      })).subscribe(function (isAuthenticated) {
+        return alert('Authenticated: ' + isAuthenticated);
+      });
+    });
+
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      email: '',
+      password: ''
+    };
     return _this;
   }
 
   _createClass(Index, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      _src_services_player__WEBPACK_IMPORTED_MODULE_2__["default"].setPlayer(this.props.player);
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.id, e.target.value));
+    }
+  }, {
+    key: "logout",
+    value: function logout() {
+      _src_services_auth__WEBPACK_IMPORTED_MODULE_2__["default"].logout().subscribe(function () {
+        return alert('Logout');
+      });
+    }
+  }, {
+    key: "getUser",
+    value: function getUser() {
+      _src_services_auth__WEBPACK_IMPORTED_MODULE_2__["default"].getUser().subscribe(function (user) {
+        console.log('user', user);
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var player = this.props.player;
-
-      if (!player) {
-        return null;
-      }
-
       return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 36
+          lineNumber: 54
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("h1", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 37
+          lineNumber: 55
         },
         __self: this
-      }, "BattleBuddy.gg"), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("p", {
+      }, "Login Page"), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("fieldset", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 56
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("b", {
+      }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("label", {
+        htmlFor: "email",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 38
+          lineNumber: 57
         },
         __self: this
-      }, "Name:"), " ", player.name), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("p", {
+      }, "E-mail"), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
+          lineNumber: 57
         },
         __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("b", {
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", {
+        id: "email",
+        type: "email",
+        value: this.state.email,
+        onChange: this.handleChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
-        },
-        __self: this
-      }, "Player Name (PUBG):"), " ", player.integrations.pubg.playerName), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("p", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 40
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("b", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 40
-        },
-        __self: this
-      }, "Total Kills:"), " ", player.integrations.pubg.summary.totalKills), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("p", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 41
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("b", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 41
-        },
-        __self: this
-      }, "Total Wins:"), " ", player.integrations.pubg.summary.totalWins), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("p", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 42
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("b", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 42
-        },
-        __self: this
-      }, "Total Loses:"), " ", player.integrations.pubg.summary.totalLoses), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 58
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 59
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 60
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("label", {
+        htmlFor: "password",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 61
+        },
+        __self: this
+      }, "Password"), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 61
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("input", {
+        id: "password",
+        type: "password",
+        value: this.state.password,
+        onChange: this.handleChange,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 62
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 63
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 64
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("button", {
+        onClick: this.submit,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65
+        },
+        __self: this
+      }, "Login"), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("button", {
+        onClick: this.logout,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 66
+        },
+        __self: this
+      }, "Logout"), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 66
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 66
+        },
+        __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("button", {
+        onClick: this.getUser,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 67
+        },
+        __self: this
+      }, "Get User")), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 69
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("small", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 45
+          lineNumber: 70
         },
         __self: this
       }, "Rendering by: ", this.isClientOrServer()));
@@ -507,27 +577,21 @@ var apiService = new ApiService(_settings__WEBPACK_IMPORTED_MODULE_2__["API_ENDP
 
 /***/ }),
 
-/***/ "./src/services/player.ts":
-/*!********************************!*\
-  !*** ./src/services/player.ts ***!
-  \********************************/
-/*! exports provided: PlayerService, default */
+/***/ "./src/services/auth.ts":
+/*!******************************!*\
+  !*** ./src/services/auth.ts ***!
+  \******************************/
+/*! exports provided: AuthService, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayerService", function() { return PlayerService; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "rxjs");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./api */ "./src/services/api.ts");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthService", function() { return AuthService; });
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "rxjs");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./api */ "./src/services/api.ts");
+/* harmony import */ var _token__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./token */ "./src/services/token.ts");
+/* harmony import */ var _rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../rxjs-operators */ "./src/rxjs-operators/index.ts");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -536,58 +600,70 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var PlayerService =
+
+
+var AuthService =
 /*#__PURE__*/
 function () {
-  function PlayerService(api) {
-    _classCallCheck(this, PlayerService);
+  function AuthService(api, tokenService) {
+    var _this = this;
+
+    _classCallCheck(this, AuthService);
 
     this.api = api;
-    this.player$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"]({});
+    this.tokenService = tokenService;
+    this.user$ = this.tokenService.getToken().pipe(_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["default"].map(function (token) {
+      if (!token) {
+        return null;
+      }
+
+      var user = _this.tokenService.decode(token);
+
+      if (!user) {
+        return null;
+      }
+
+      return user;
+    }), _rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["default"].catchError(function () {
+      return rxjs__WEBPACK_IMPORTED_MODULE_0__["of"](null);
+    }), _rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["default"].shareReplay(1));
   }
 
-  _createClass(PlayerService, [{
-    key: "get",
-    value: function () {
-      var _get = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var req;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                req = this.api.get('/player').toPromise();
-                return _context.abrupt("return", req);
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
+  _createClass(AuthService, [{
+    key: "login",
+    value: function login(email, password) {
+      return this.api.post('/login', {
+        email: email,
+        password: password
+      }).pipe(_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["default"].switchMap(function (response) {
+        return _token__WEBPACK_IMPORTED_MODULE_2__["default"].setToken(response.token);
+      }), _rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["default"].tap(function () {
+        return console.log('Login efetuado com sucesso!');
       }));
-
-      return function get() {
-        return _get.apply(this, arguments);
-      };
-    }()
-  }, {
-    key: "setPlayer",
-    value: function setPlayer(player) {
-      this.player$.next(player);
     }
   }, {
-    key: "getPlayer",
-    value: function getPlayer() {
-      return this.player$.asObservable();
+    key: "logout",
+    value: function logout() {
+      return this.tokenService.clearToken();
+    }
+  }, {
+    key: "getUser",
+    value: function getUser() {
+      return this.user$;
+    }
+  }, {
+    key: "isAuthenticated",
+    value: function isAuthenticated() {
+      return this.tokenService.getToken().pipe(_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["default"].map(function (token) {
+        return !!token;
+      }));
     }
   }]);
 
-  return PlayerService;
+  return AuthService;
 }();
-var playerService = new PlayerService(_api__WEBPACK_IMPORTED_MODULE_2__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (playerService);
+var authService = new AuthService(_api__WEBPACK_IMPORTED_MODULE_1__["default"], _token__WEBPACK_IMPORTED_MODULE_2__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (authService);
 
 /***/ }),
 
@@ -759,14 +835,14 @@ var API_ENDPOINT = 'http://demo4652258.mockable.io';
 
 /***/ }),
 
-/***/ 3:
-/*!*******************************!*\
-  !*** multi ./pages/index.tsx ***!
-  \*******************************/
+/***/ 4:
+/*!************************************!*\
+  !*** multi ./pages/user/login.tsx ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./pages/index.tsx */"./pages/index.tsx");
+module.exports = __webpack_require__(/*! ./pages/user/login.tsx */"./pages/user/login.tsx");
 
 
 /***/ }),
@@ -838,4 +914,4 @@ module.exports = require("rxjs/operators");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=login.js.map
