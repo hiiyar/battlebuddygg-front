@@ -9,15 +9,12 @@
     "next": "^7.0.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts-ts": "3.1.0",
     "rxjs": "^6.3.3"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "start": "next start"
   },
   "devDependencies": {
     "@types/jest": "^23.3.5",
