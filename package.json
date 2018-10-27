@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/next": "^7.0.3",
     "@zeit/next-typescript": "^1.1.1",
     "axios": "^0.18.0",
+    "emotion": "^9.2.12",
     "luxon": "^1.4.3",
     "next": "^7.0.2",
     "react": "^16.5.2",
