@@ -17,7 +17,7 @@ export enum enBoost {
 
 const boostUp = css`
   border: 4px solid #252E54;
-  border-radius: 9%;
+  border-radius: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,6 @@ const boostUp = css`
 
 const title = css`
   font-size: 1.85em;
-  color: #FFF;
   font-weight: 900;
   padding: 8px 0;
   text-transform: uppercase;
@@ -35,7 +34,6 @@ const title = css`
 
 const matches = css`
   font-size: 1em;
-  color: #FFF;
   font-weight: 900;
   text-transform: uppercase;
 `;

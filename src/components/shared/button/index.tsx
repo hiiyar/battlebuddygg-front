@@ -10,11 +10,11 @@ const buttonOutlined = css`
   background: linear-gradient(52deg, #75EBD6 8%, #0093E9 100%) ;
   border: none;
   border-radius: 50px;
-  color: #FFF;
   display: inline-block;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 2px;
   text-decoration: none;
+  cursor: pointer;
   span {
     background: #161935;
     display: block;
@@ -35,11 +35,24 @@ class ButtonOutlined extends React.Component<IProps> {
   }
 }
 
+const buttonBright = css`
+  background: linear-gradient(52deg, #75EBD6 8%, #0093E9 100%);
+  box-shadow: 0px 8px 20px rgba(117, 235, 214, 0.5);
+  font-size: 1em;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 30px;
+`;
+
 class ButtonBright extends React.Component<IProps> {
   public render() {
     const { text } = this.props;
     return (
-      <button>{text}</button>
+      <button className={buttonBright}>
+        <span>{text}</span>
+      </button>
     );
   }
 }

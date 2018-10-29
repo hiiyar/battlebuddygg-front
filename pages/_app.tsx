@@ -9,10 +9,14 @@ injectGlobal `
   }
   * {
     font-family: 'Lato', sans-serif;
+    color: #FFF;
   }
   body {
     background: #161935;
     margin: 0;
+  }
+  h1 {
+    font-size: 1.75em;
   }
 `;
 
