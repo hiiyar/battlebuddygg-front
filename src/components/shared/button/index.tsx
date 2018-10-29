@@ -44,6 +44,7 @@ const buttonBright = css`
   padding: 8px 20px;
   border: none;
   border-radius: 30px;
+  cursor: pointer;
 `;
 
 class ButtonBright extends React.Component<IProps> {
