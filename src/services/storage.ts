@@ -1,14 +1,13 @@
-import * as rxjs from 'rxjs';
-import * as rxjsOperators from 'rxjs/operators';
+import * as rxjs from "rxjs";
+import * as rxjsOperators from "rxjs/operators";
 
-import { apiResponseFormatter } from '../formatters/apiResponse';
+import { apiResponseFormatter } from "../formatters/apiResponse";
 
 export class StorageService {
-
   public get<T = any>(key: string): rxjs.Observable<T> {
     return rxjs.of(true).pipe(
       rxjsOperators.map(() => localStorage.getItem(key)),
-      rxjsOperators.map(data => data ? apiResponseFormatter(JSON.parse(data)) : null),
+      rxjsOperators.map(data => (data ? apiResponseFormatter(JSON.parse(data)) : null)),
       rxjsOperators.catchError(() => rxjs.of(null))
     );
   }
@@ -31,7 +30,6 @@ export class StorageService {
       })
     );
   }
-
 }
 
 const storageService = new StorageService();

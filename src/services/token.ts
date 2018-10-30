@@ -1,7 +1,7 @@
-import { Observable, ReplaySubject } from 'rxjs';
-import * as rxjsOperators from '../rxjs-operators';
+import { Observable, ReplaySubject } from "rxjs";
+import * as rxjsOperators from "../rxjs-operators";
 
-import storageService, { StorageService } from './storage';
+import storageService, { StorageService } from "./storage";
 
 export class TokenService {
   private token$: ReplaySubject<string>;
@@ -9,8 +9,7 @@ export class TokenService {
   constructor(private storageService: StorageService) {
     this.token$ = new ReplaySubject(1);
 
-    this.storageService.get('battleBuddyAuthToken')
-      .subscribe(token => this.token$.next(token));
+    this.storageService.get("battleBuddyAuthToken").subscribe(token => this.token$.next(token));
   }
 
   public getToken(): Observable<string> {
@@ -18,9 +17,9 @@ export class TokenService {
   }
 
   public setToken(token: string): Observable<string> {
-    return this.storageService.set('battleBuddyAuthToken', token).pipe(
-      rxjsOperators.tap(() => this.token$.next(token))
-    );
+    return this.storageService
+      .set("battleBuddyAuthToken", token)
+      .pipe(rxjsOperators.tap(() => this.token$.next(token)));
   }
 
   public clearToken(): Observable<void> {
@@ -29,7 +28,7 @@ export class TokenService {
 
   public decode<T>(token: string): T {
     try {
-      const data = JSON.parse(atob(token.split('.')[1]));
+      const data = JSON.parse(atob(token.split(".")[1]));
       const currentTime = Date.now() / 1000;
 
       return currentTime > data.exp ? null : data;

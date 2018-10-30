@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { css } from 'emotion';
+import * as React from "react";
+import { css } from "emotion";
 
 export interface IProps {
   text: string;
-  style: 'outlined' | 'bright';
+  style: "outlined" | "bright";
 }
 
 const buttonOutlined = css`
-  background: linear-gradient(52deg, #75EBD6 8%, #0093E9 100%) ;
+  background: linear-gradient(52deg, #75ebd6 8%, #0093e9 100%);
   border: none;
   border-radius: 50px;
   display: inline-block;
@@ -36,7 +36,7 @@ class ButtonOutlined extends React.Component<IProps> {
 }
 
 const buttonBright = css`
-  background: linear-gradient(52deg, #75EBD6 8%, #0093E9 100%);
+  background: linear-gradient(52deg, #75ebd6 8%, #0093e9 100%);
   box-shadow: 0px 8px 20px rgba(117, 235, 214, 0.5);
   font-size: 1em;
   font-weight: 900;
@@ -62,16 +62,12 @@ export default class Button extends React.Component<IProps> {
   public render() {
     const { style } = this.props;
 
-    if (style === 'outlined') {
-      return (
-        <ButtonOutlined {...this.props} />
-      );
+    if (style === "outlined") {
+      return <ButtonOutlined {...this.props} />;
     }
 
-    if (style === 'bright') {
-      return (
-        <ButtonBright {...this.props} />
-      );
+    if (style === "bright") {
+      return <ButtonBright {...this.props} />;
     }
 
     return null;

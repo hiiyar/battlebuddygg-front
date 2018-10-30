@@ -22,12 +22,7 @@ export default class BoostUp extends React.Component {
   public render() {
     return (
       <div className={boostUp}>
-        <img
-          src="/static/images/boost/boostup.png"
-          alt="Boost Up"
-          width={149}
-          height={147}
-        />
+        <img src="/static/images/boost/boostup.png" alt="Boost Up" width={149} height={147} />
         <div className={title}>BOOST UP!</div>
       </div>
     );

@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
     return {
       ...page,
       emotion: emotionCss,
-      evergreen: evergreenCss
+      evergreen: evergreenCss,
     };
   }
 
@@ -27,18 +27,9 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1,shrink-to-fit=no"
-          />
-          <style
-            id="evergreen"
-            dangerouslySetInnerHTML={{ __html: this.props.evergreen.css }}
-          />
-          <style
-            id="emotion"
-            dangerouslySetInnerHTML={{ __html: this.props.emotion.css }}
-          />
+          <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+          <style id="evergreen" dangerouslySetInnerHTML={{ __html: this.props.evergreen.css }} />
+          <style id="emotion" dangerouslySetInnerHTML={{ __html: this.props.emotion.css }} />
         </Head>
 
         <body>

@@ -12,7 +12,7 @@ export interface IProps {
 export enum enBoost {
   Gold = "gold",
   Silver = "silver",
-  Bronze = "bronze"
+  Bronze = "bronze",
 }
 
 const boostUp = css`

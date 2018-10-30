@@ -43,24 +43,14 @@ const solidButton = css`
 export default class Navbar extends React.Component {
   public render() {
     return (
-      <Pane
-        display="flex"
-        alignItems="center"
-        paddingTop={30}
-        borderRadius={3}
-      >
+      <Pane display="flex" alignItems="center" paddingTop={30} borderRadius={3}>
         <Pane flex={1} alignItems="center" display="flex">
           <img src="/static/images/logo.png" alt="Battle Buddy" />
         </Pane>
         <Pane display="flex" alignItems="center">
           <Button marginRight={30} className={roundedButton} />
           <Button className={solidButton} />
-          <Pane
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            justifyContent="center"
-          >
+          <Pane display="flex" flexDirection="row" alignItems="center" justifyContent="center">
             <Avatar
               src="https://pbs.twimg.com/profile_images/756196362576723968/6GUgJG4L_400x400.jpg"
               name="Jeroen Ransijn"
