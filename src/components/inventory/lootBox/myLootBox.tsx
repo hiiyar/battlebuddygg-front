@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import Button from '../../shared/button';
+import * as React from "react";
+import { css } from "emotion";
+import Button from "../../shared/button";
 
 const myLootBox = css`
-  background-color: #252E54;
+  background-color: #252e54;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
@@ -33,11 +33,17 @@ export default class MyLootBox extends React.Component {
     return (
       <div className={myLootBox}>
         <div className={title}>Loot Box #1</div>
-        <img className={box} src='/static/images/lootBox/box.png' alt='Loot Box'/>
+        <img
+          className={box}
+          src="/static/images/lootBox/box.png"
+          alt="Loot Box"
+          width={100}
+          height={91}
+        />
         <div className={button}>
-          <Button style='bright' text='Claim' />
+          <Button style="bright" text="Claim" />
         </div>
       </div>
-    )
+    );
   }
 }
