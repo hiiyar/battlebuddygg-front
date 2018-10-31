@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { css } from 'emotion';
-import MyLootBox from './myLootBox';
+import * as React from "react";
+import { css } from "emotion";
+import MyLootBox from "./myLootBox";
 
 const header = css`
   display: flex;
@@ -22,12 +22,11 @@ const lootBox = css`
 `;
 
 export default class LootBox extends React.Component {
-
   public render() {
     return (
       <div>
         <div className={header}>
-          <img src='/static/images/lootBox/lootBoxIcon.svg'/>
+          <img src="/static/images/lootBox/lootBoxIcon.svg" />
           <h1>Your Loot Box</h1>
         </div>
         <div className={lootBox}>
@@ -41,6 +40,6 @@ export default class LootBox extends React.Component {
           <MyLootBox />
         </div>
       </div>
-    )
+    );
   }
 }

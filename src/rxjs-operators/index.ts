@@ -1,6 +1,6 @@
-import * as coreOperators from 'rxjs/operators';
+import * as coreOperators from "rxjs/operators";
 
-export * from 'rxjs/operators';
+export * from "rxjs/operators";
 
 const rxjsOperators = {
   ...coreOperators,

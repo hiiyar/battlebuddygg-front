@@ -9,15 +9,15 @@ export function apiResponseFormatter<T>(obj: T): T {
     return obj.map(i => apiResponseFormatter(i)) as any;
   }
 
-  if (typeof obj === 'string' && isValidDateString(obj)) {
+  if (typeof obj === "string" && isValidDateString(obj)) {
     return dateParse(obj) as any;
   }
 
-  if (typeof obj === 'string' && !isNaN(Number(obj))) {
+  if (typeof obj === "string" && !isNaN(Number(obj))) {
     return Number(obj) as any;
   }
 
-  if (typeof obj === 'object' && !(obj instanceof Date)) {
+  if (typeof obj === "object" && !(obj instanceof Date)) {
     return Object.keys(obj).reduce((acc, key) => {
       acc[key] = apiResponseFormatter(obj[key]);
       return acc;

@@ -6,7 +6,9 @@
     "@types/next": "^7.0.3",
     "@zeit/next-typescript": "^1.1.1",
     "axios": "^0.18.0",
+    "babel-plugin-emotion": "^9.2.11",
     "emotion": "^9.2.12",
+    "emotion-server": "^9.2.12",
     "evergreen-ui": "^4.2.0",
     "luxon": "^1.4.3",
     "next": "^7.0.2",
@@ -25,6 +27,20 @@
     "@types/node": "^10.11.7",
     "@types/react": "^16.4.16",
     "@types/react-dom": "^16.0.9",
+    "husky": "^1.1.2",
+    "lint-staged": "^8.0.2",
+    "prettier": "1.14.3",
     "typescript": "^3.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,json,js,css,md}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

@@ -1,8 +1,8 @@
-import React from 'react';
-import App, { Container } from 'next/app';
-import { injectGlobal, css } from 'emotion';
+import React from "react";
+import App, { Container } from "next/app";
+import { injectGlobal, css } from "emotion";
 
-injectGlobal `
+injectGlobal`
   @font-face {
     font-family: 'Lato', sans-serif;
     src: url('https://fonts.googleapis.com/css?family=Lato:400,900')
@@ -25,7 +25,7 @@ const wrapper = css`
   margin: auto;
 `;
 
-export default class MyApp extends App {
+export default class BattleBuddy extends App {
   render() {
     const { Component, pageProps } = this.props;
 
