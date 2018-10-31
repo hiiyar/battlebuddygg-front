@@ -37,13 +37,7 @@ export default class MyLootBox extends React.Component {
     return (
       <div className={myLootBox}>
         <div className={title}>Loot Box #1</div>
-        <img
-          className={box}
-          src="/static/images/lootBox/box.png"
-          alt="Loot Box"
-          width={100}
-          height={91}
-        />
+        <img className={box} src="/static/images/lootBox/box.png" alt="Loot Box" />
         <div className={button}>
           <Button style="bright" text="Claim" />
         </div>

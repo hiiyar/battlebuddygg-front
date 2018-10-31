@@ -2,7 +2,7 @@ import * as React from "react";
 import { css } from "emotion";
 
 const boostUp = css`
-  background: url('/static/images/boost/boostbox.png') no-repeat;
+  background: url("/static/images/boost/boostbox.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ export default class BoostUp extends React.Component {
   public render() {
     return (
       <div className={boostUp}>
-        <img src="/static/images/boost/boostup.png" alt="Boost Up" width={149} height={147} />
+        <img src="/static/images/boost/boostup.png" alt="Boost Up" />
         <div className={title}>BOOST UP!</div>
       </div>
     );
