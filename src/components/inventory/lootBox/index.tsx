@@ -12,9 +12,13 @@ const header = css`
 `;
 
 const lootBox = css`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 45px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-items: center;
+  align-items: center;
+  row-gap: 55px;
+  column-gap: 1%;
+  margin: 40px 0;
 `;
 
 export default class LootBox extends React.Component {
@@ -27,6 +31,9 @@ export default class LootBox extends React.Component {
           <h1>Your Loot Box</h1>
         </div>
         <div className={lootBox}>
+          <MyLootBox />
+          <MyLootBox />
+          <MyLootBox />
           <MyLootBox />
           <MyLootBox />
           <MyLootBox />

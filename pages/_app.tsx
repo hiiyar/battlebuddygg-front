@@ -21,7 +21,7 @@ injectGlobal `
 `;
 
 const wrapper = css`
-  max-width: 63%;
+  max-width: 80%;
   margin: auto;
 `;
 

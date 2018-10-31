@@ -22,7 +22,11 @@ const boostUp = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 270px;
+  width: 23%;
+  transition: transform 0.5s;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const title = css`

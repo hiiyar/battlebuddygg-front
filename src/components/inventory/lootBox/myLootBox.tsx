@@ -10,7 +10,11 @@ const myLootBox = css`
   align-items: center;
   justify-content: center;
   padding: 30px 0;
-  width: 215px;
+  width: 100%;
+  transition: transform 0.5s;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const title = css`
@@ -20,7 +24,7 @@ const title = css`
 
 const box = css`
   margin-top: 30px;
-  width: 100px;
+  width: 45%;
 `;
 
 const button = css`

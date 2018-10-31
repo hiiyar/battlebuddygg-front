@@ -45,6 +45,10 @@ const buttonBright = css`
   border: none;
   border-radius: 30px;
   cursor: pointer;
+  transition: transform 0.5s;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 class ButtonBright extends React.Component<IProps> {

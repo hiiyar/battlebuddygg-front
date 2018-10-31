@@ -3,12 +3,12 @@ import { css } from 'emotion';
 
 const boostUp = css`
   background: url('/static/images/boost/boostbox.png') no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 275px;
+  width: 23%;
 `;
 
 const title = css`
