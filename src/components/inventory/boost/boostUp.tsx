@@ -18,11 +18,23 @@ const title = css`
   padding: 8px 0;
 `;
 
+const boostUpIconWrapper = css`
+  width: 42.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+  }
+`;
+
 export default class BoostUp extends React.Component {
   public render() {
     return (
       <div className={boostUp}>
-        <img src="/static/images/boost/boostup.png" alt="Boost Up" />
+        <div className={boostUpIconWrapper}>
+          <img src="/static/images/boost/boostup.png" alt="Boost Up" />
+        </div>
         <div className={title}>BOOST UP!</div>
       </div>
     );

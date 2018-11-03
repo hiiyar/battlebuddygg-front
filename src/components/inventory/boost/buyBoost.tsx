@@ -1,21 +1,13 @@
 import * as React from "react";
 import { css } from "emotion";
 import Button from "../../shared/button";
+import { IBoost } from "../../../interfaces/boost";
 
 export interface IProps {
-  boostType: enBoost;
-  price: number;
-  matchesNumber: number;
-  currencySymbol: string;
+  boost: IBoost;
 }
 
-export enum enBoost {
-  Gold = "gold",
-  Silver = "silver",
-  Bronze = "bronze",
-}
-
-const boostUp = css`
+const buyBoost = css`
   border: 4px solid #252e54;
   border-radius: 25px;
   display: flex;
@@ -46,22 +38,37 @@ const buyButton = css`
   padding: 20px 0;
 `;
 
+const buyBoostIconWrapper = css`
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+  }
+`;
+
 export default class BuyBoost extends React.Component<IProps> {
   public render() {
-    const { boostType, matchesNumber, currencySymbol, price } = this.props;
+    const { boost } = this.props;
 
     return (
-      <div className={boostUp}>
-        <img
-          src={`/static/images/boost/${boostType}.png`}
-          alt="Boost Up"
-          width={106}
-          height={104}
-        />
-        <div className={title}>{boostType}</div>
-        <div className={matches}>{matchesNumber} matches</div>
+      <div className={buyBoost}>
+        <div className={buyBoostIconWrapper}>
+          <img
+            src={`/static/images/boost/${boost.icon.name}.${boost.icon.extension}`}
+            alt={boost.name}
+          />
+        </div>
+        <div className={title}>{boost.name}</div>
+        <div className={matches}>{boost.matches} matches</div>
         <div className={buyButton}>
-          <Button style="outlined" text={currencySymbol + price} />
+          <Button
+            style="outlined"
+            text={new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+              boost.value
+            )}
+          />
         </div>
       </div>
     );
