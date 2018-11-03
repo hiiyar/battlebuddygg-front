@@ -1,6 +1,11 @@
 import * as React from "react";
 import { css } from "emotion";
 import Button from "../../shared/button";
+import { ILootBox } from "../../../interfaces/lootBox";
+
+export interface IProps {
+  lootBox: ILootBox;
+}
 
 const myLootBox = css`
   background-color: #252e54;
@@ -32,12 +37,14 @@ const button = css`
   top: 45px;
 `;
 
-export default class MyLootBox extends React.Component {
+export default class MyLootBox extends React.Component<IProps> {
   public render() {
+    const lootBox = this.props.lootBox.lootbox;
+
     return (
       <div className={myLootBox}>
-        <div className={title}>Loot Box #1</div>
-        <img className={box} src="/static/images/lootBox/box.png" alt="Loot Box" />
+        <div className={title}>{lootBox.name}</div>
+        <img className={box} src="/static/images/lootBox/box.png" alt={lootBox.name} />
         <div className={button}>
           <Button style="bright" text="Claim" />
         </div>
