@@ -1,13 +1,13 @@
-import * as rxjs from 'rxjs';
-import { IUser }from '../interfaces/user';
-import apiService, { ApiService } from './api';
-import tokenService, { TokenService } from './token';
-import rxjsOperators from '../rxjs-operators';
+import * as rxjs from "rxjs";
+import { IUser } from "../interfaces/user";
+import apiService, { ApiService } from "./api";
+import tokenService, { TokenService } from "./token";
+import rxjsOperators from "../rxjs-operators";
 
 export class AuthService {
   private user$: rxjs.Observable<Readonly<IUser>>;
 
-  constructor (private api: ApiService, private tokenService: TokenService) {
+  constructor(private api: ApiService, private tokenService: TokenService) {
     this.user$ = this.tokenService.getToken().pipe(
       rxjsOperators.map(token => {
         if (!token) {
@@ -16,7 +16,7 @@ export class AuthService {
 
         const user = this.tokenService.decode<IUser>(token);
         if (!user) {
-          return null
+          return null;
         }
 
         return user;
@@ -29,9 +29,9 @@ export class AuthService {
   }
 
   public login(email: string, password: string): rxjs.Observable<any> {
-    return this.api.post('/login', { email, password }).pipe(
+    return this.api.post("/login", { email, password }).pipe(
       rxjsOperators.switchMap(response => tokenService.setToken(response.token)),
-      rxjsOperators.tap(() => console.log('Login efetuado com sucesso!'))
+      rxjsOperators.tap(() => console.log("Login efetuado com sucesso!"))
     );
   }
 
@@ -44,9 +44,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): rxjs.Observable<boolean> {
-    return this.tokenService.getToken().pipe(
-      rxjsOperators.map(token => !!token)
-    );
+    return this.tokenService.getToken().pipe(rxjsOperators.map(token => !!token));
   }
 }
 
