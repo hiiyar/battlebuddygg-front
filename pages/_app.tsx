@@ -1,6 +1,8 @@
 import React from "react";
 import App, { Container } from "next/app";
 import { injectGlobal, css } from "emotion";
+import { ApolloProvider } from "react-apollo";
+import withApolloClient from "../lib/with-apollo-client";
 
 injectGlobal`
   @font-face {
@@ -25,16 +27,20 @@ const wrapper = css`
   margin: auto;
 `;
 
-export default class BattleBuddy extends App {
+class BattleBuddy extends App {
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, apolloClient } = this.props;
 
     return (
       <Container>
         <div className={wrapper}>
-          <Component {...pageProps} />
+          <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+          </ApolloProvider>
         </div>
       </Container>
     );
   }
 }
+
+export default withApolloClient(BattleBuddy);

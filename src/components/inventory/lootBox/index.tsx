@@ -1,6 +1,9 @@
 import * as React from "react";
 import { css } from "emotion";
 import MyLootBox from "./myLootBox";
+import { Query } from "react-apollo";
+import lootBoxesQuery from "../../../../graphql/lootBoxesbyUser";
+import { ILootBox } from "../../../interfaces/lootBox";
 
 const header = css`
   display: flex;
@@ -13,7 +16,7 @@ const header = css`
 
 const lootBox = css`
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: 20% 20% 20% 20% 20%;
   justify-items: center;
   align-items: center;
   row-gap: 55px;
@@ -30,14 +33,19 @@ export default class LootBox extends React.Component {
           <h1>Your Loot Box</h1>
         </div>
         <div className={lootBox}>
-          <MyLootBox />
-          <MyLootBox />
-          <MyLootBox />
-          <MyLootBox />
-          <MyLootBox />
-          <MyLootBox />
-          <MyLootBox />
-          <MyLootBox />
+          <Query query={lootBoxesQuery} variables={{ id: "#1" }}>
+            {({ loading, error, data }) => {
+              if (loading) return "loading...";
+
+              if (error) return `Error! ${error}`;
+
+              return data.user.lootboxes.map((lootBox: ILootBox) => (
+                <div>
+                  <MyLootBox lootBox={lootBox} />
+                </div>
+              ));
+            }}
+          </Query>
         </div>
       </div>
     );

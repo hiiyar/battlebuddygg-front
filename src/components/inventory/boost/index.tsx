@@ -1,7 +1,10 @@
 import * as React from "react";
 import BoostUp from "./boostUp";
-import BuyBoost, { enBoost } from "./buyBoost";
+import BuyBoost from "./buyBoost";
 import { css } from "emotion";
+import boostQuery from "../../../../graphql/boost";
+import { Query } from "react-apollo";
+import { IBoost } from "../../../interfaces/boost";
 
 const boost = css`
   display: flex;
@@ -14,9 +17,20 @@ export default class Boost extends React.Component {
     return (
       <div className={boost}>
         <BoostUp />
-        <BuyBoost boostType={enBoost.Bronze} price={10} matchesNumber={3} currencySymbol={"€"} />
-        <BuyBoost boostType={enBoost.Silver} price={20} matchesNumber={3} currencySymbol={"€"} />
-        <BuyBoost boostType={enBoost.Gold} price={30} matchesNumber={3} currencySymbol={"€"} />
+
+        <Query query={boostQuery}>
+          {({ loading, error, data }) => {
+            if (loading) return "loading...";
+
+            if (error) return `Error! ${error}`;
+
+            data.boosts.sort((a: IBoost, b: IBoost) => a.order - b.order);
+
+            return data.boosts.map((boost: IBoost, index: number) => (
+              <BuyBoost key={index} boost={boost} />
+            ));
+          }}
+        </Query>
       </div>
     );
   }
