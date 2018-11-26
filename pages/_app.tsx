@@ -20,6 +20,27 @@ injectGlobal`
   h1 {
     font-size: 1.75em;
   }
+
+  /* width */
+  ::-webkit-scrollbar {
+      width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+      background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 30px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const wrapper = css`

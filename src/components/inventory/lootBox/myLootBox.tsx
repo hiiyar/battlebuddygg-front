@@ -2,9 +2,16 @@ import * as React from "react";
 import { css } from "emotion";
 import Button from "../../shared/button";
 import { ILootBox } from "../../../interfaces/lootBox";
+import Modal from "../../shared/modal";
+import LootBoxItems from "../lootBoxItems/index";
+import Roulette from "../lootBoxItems/roulette/index";
 
 export interface IProps {
   lootBox: ILootBox;
+}
+
+export interface IState {
+  openLootBox: boolean;
 }
 
 const myLootBox = css`
@@ -37,17 +44,37 @@ const button = css`
   top: 45px;
 `;
 
-export default class MyLootBox extends React.Component<IProps> {
+export default class MyLootBox extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = { openLootBox: false };
+  }
+
+  openLootBox = () => {
+    this.setState({ openLootBox: true });
+  };
+
+  onClose = () => {
+    this.setState({ openLootBox: false });
+  };
+
   public render() {
     const lootBox = this.props.lootBox.lootbox;
+    const { openLootBox } = this.state;
 
     return (
       <div className={myLootBox}>
         <div className={title}>{lootBox.name}</div>
         <img className={box} src="/static/images/lootBox/box.png" alt={lootBox.name} />
         <div className={button}>
-          <Button style="bright" text="Claim" />
+          <Button style="bright" text="Claim" onClick={this.openLootBox.bind(this, true)} />
         </div>
+
+        <Modal isShown={openLootBox} onClose={this.onClose}>
+          <LootBoxItems />
+          <Roulette />
+        </Modal>
       </div>
     );
   }
