@@ -2,5 +2,11 @@ export interface IUser {
   id: number;
   email: string;
   name: string;
-  exp: number;
+}
+
+export interface ILoginResponse {
+  login: {
+    user: IUser;
+    token: string;
+  };
 }
