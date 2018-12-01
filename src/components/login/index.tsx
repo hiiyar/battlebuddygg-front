@@ -1,7 +1,6 @@
 import * as React from "react";
 import { css } from "emotion";
 import Button from "../shared/button";
-import { Tablist, Tab } from "evergreen-ui";
 import authService from "../../services/auth";
 import Router from "next/router";
 import rxjsOperators from "../../rxjs-operators/index";
@@ -69,6 +68,7 @@ const button = css`
 
 const tablist = css`
   padding: 40px 0 0;
+  display: flex;
 `;
 
 const tabAppearance = css`
@@ -76,23 +76,20 @@ const tabAppearance = css`
   border-radius: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   font-family: "Lato", sans-serif;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 900;
   color: #556cd3;
   cursor: pointer;
-  padding: 0px 40px 34px;
+  padding: 0px 40px 20px;
   margin: 0;
-  &[aria-selected="true"] {
-    color: #fff;
-    border-bottom: 7px solid;
-    border-image-source: linear-gradient(52deg, #75ebd6 8%, #0093e9 100%);
-    border-image-slice: 7;
-    box-sizing: border-box;
-    padding-bottom: 28px;
-  }
-  &:focus {
-    outline: none;
-  }
+`;
+
+const tabSelected = css`
+  color: #fff;
+  border-bottom: 7px solid;
+  border-image-source: linear-gradient(52deg, #75ebd6 8%, #0093e9 100%);
+  border-image-slice: 7;
+  box-sizing: border-box;
 `;
 
 const loginAccount = css`
@@ -149,20 +146,20 @@ export default class Login extends React.Component<{}, IState> {
               <span>GG</span>
             </div>
           </div>
-          <Tablist className={tablist}>
+          <div className={tablist}>
             {this.state.tabs.map((tab, index) => (
-              <Tab
+              <div
                 key={tab}
                 id={tab}
-                onSelect={() => this.setState({ selectedIndex: index })}
-                isSelected={index === this.state.selectedIndex}
-                aria-controls={"panel-" + tab}
-                className={tabAppearance}
+                onClick={() => this.setState({ selectedIndex: index })}
+                className={`${tabAppearance} ${
+                  index === this.state.selectedIndex ? tabSelected : ""
+                }`}
               >
                 {tab}
-              </Tab>
+              </div>
             ))}
-          </Tablist>
+          </div>
           {this.state.selectedIndex === 0 ? (
             <div className={form}>
               <input
