@@ -76,7 +76,7 @@ const tabAppearance = css`
   border-radius: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   font-family: "Lato", sans-serif;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 900;
   color: #556cd3;
   cursor: pointer;
