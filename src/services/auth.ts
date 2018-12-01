@@ -1,8 +1,9 @@
 import * as rxjs from "rxjs";
-import { IUser } from "../interfaces/user";
+import { IUser, ILoginResponse } from "../interfaces/user";
 import apiService, { ApiService } from "./api";
 import tokenService, { TokenService } from "./token";
 import rxjsOperators from "../rxjs-operators";
+import login from "../../graphql/login";
 
 export class AuthService {
   private user$: rxjs.Observable<Readonly<IUser>>;
@@ -29,8 +30,10 @@ export class AuthService {
   }
 
   public login(email: string, password: string): rxjs.Observable<any> {
-    return this.api.post("/login", { email, password }).pipe(
-      rxjsOperators.switchMap(response => tokenService.setToken(response.token)),
+    return this.api.query(login, { email, password }).pipe(
+      rxjsOperators.switchMap((response: ILoginResponse) =>
+        tokenService.setToken(response.login.token)
+      ),
       rxjsOperators.tap(() => console.log("Login efetuado com sucesso!"))
     );
   }
