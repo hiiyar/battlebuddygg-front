@@ -7,10 +7,9 @@ export default gql`
       name
       value
       matches
-      order
-      icon {
-        name
-        extension
+      index
+      icons {
+        url
       }
     }
   }

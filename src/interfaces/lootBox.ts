@@ -1,14 +1,14 @@
+import { IIcon } from "./icons";
+
 export interface ILootBox {
-  lootbox: {
-    id: string;
-    name: string;
-    items: IItems[];
-  };
+  id: string;
+  name: string;
+  items: IItems[];
+  icons: IIcon[];
 }
 
 export interface IItems {
-  item: {
-    id: string;
-    name: string;
-  };
+  id: string;
+  name: string;
+  icons: IIcon[];
 }

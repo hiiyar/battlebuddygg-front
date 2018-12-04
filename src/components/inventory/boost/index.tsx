@@ -24,7 +24,7 @@ export default class Boost extends React.Component {
 
             if (error) return `Error! ${error}`;
 
-            data.boosts.sort((a: IBoost, b: IBoost) => a.order - b.order);
+            data.boosts.sort((a: IBoost, b: IBoost) => a.index - b.index);
 
             return data.boosts.map((boost: IBoost, index: number) => (
               <BuyBoost key={index} boost={boost} />
