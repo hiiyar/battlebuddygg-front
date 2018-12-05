@@ -3,9 +3,28 @@ import axios, { AxiosError } from "axios";
 import { API_ENDPOINT } from "../settings";
 import tokenService, { TokenService } from "./token";
 import rxjsOperators from "../rxjs-operators";
+import initApollo from "../../lib/init-apollo";
 
 export class ApiService {
-  constructor(private apiEndpoint: string, private tokenService: TokenService) {}
+  private apolloClient: any = null;
+
+  constructor(private apiEndpoint: string, private tokenService: TokenService) {
+    this.apolloClient = initApollo();
+  }
+
+  public query(query: any, variables?: any): rxjs.Observable<any> {
+    return this.tokenService.getToken().pipe(
+      rxjsOperators.first(),
+      rxjsOperators.switchMap(() => {
+        return this.apolloClient.query({
+          query,
+          variables,
+        });
+      }),
+      rxjsOperators.map((res: any) => res.data),
+      rxjsOperators.catchError(err => this.handleError(err))
+    );
+  }
 
   public get(url: string, params?: any): rxjs.Observable<any> {
     return this.request("GET", url, params);
@@ -38,7 +57,8 @@ export class ApiService {
     );
   }
 
-  private handleError(err: AxiosError) {
+  private handleError(err: any) {
+    alert(err);
     return rxjs.throwError(err);
   }
 }

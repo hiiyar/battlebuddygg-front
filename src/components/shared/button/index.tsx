@@ -5,6 +5,7 @@ export interface IProps {
   text: string;
   style?: "outlined" | "bright";
   onClick?: Function;
+  disableShadow?: boolean;
 }
 
 const buttonOutlined = css`
@@ -73,15 +74,18 @@ class ButtonBright extends React.Component<IProps> {
 
 const button = css`
   background: linear-gradient(52deg, #75ebd6 8%, #0093e9 100%);
-  box-shadow: 0px 10px 30px rgba(117, 235, 214, 0.5);
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 15px 20px;
   border: none;
   border-radius: 20px;
-  font-size: 3.5em;
+  font-size: 1.2em;
   font-weight: 900;
   cursor: pointer;
+`;
+
+const shadow = css`
+  box-shadow: 0px 10px 30px rgba(117, 235, 214, 0.5);
 `;
 
 export default class Button extends React.Component<IProps> {
@@ -90,7 +94,7 @@ export default class Button extends React.Component<IProps> {
   };
 
   public render() {
-    const { style } = this.props;
+    const { style, disableShadow } = this.props;
 
     if (style === "outlined") {
       return <ButtonOutlined {...this.props} />;
@@ -103,7 +107,7 @@ export default class Button extends React.Component<IProps> {
     const { text } = this.props;
 
     return (
-      <button className={button} onClick={this.handleClick}>
+      <button className={`${button} ${!disableShadow ? shadow : ""}`} onClick={this.handleClick}>
         <span>{text}</span>
       </button>
     );

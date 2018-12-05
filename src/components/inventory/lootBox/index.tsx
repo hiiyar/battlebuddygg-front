@@ -4,6 +4,12 @@ import MyLootBox from "./myLootBox";
 import { Query } from "react-apollo";
 import lootBoxesQuery from "../../../../graphql/lootBoxesbyUser";
 import { ILootBox } from "../../../interfaces/lootBox";
+import authService from "../../../services/auth";
+import { IUser } from "../../../interfaces/user";
+
+interface IState {
+  userId: string;
+}
 
 const header = css`
   display: flex;
@@ -24,8 +30,24 @@ const lootBox = css`
   margin: 40px 0;
 `;
 
-export default class LootBox extends React.Component {
+const lootBoxContainer = css`
+  width: 100%;
+`;
+
+export default class LootBox extends React.Component<{}, IState> {
+  componentDidMount() {
+    authService.getUser().subscribe((user: IUser) => {
+      this.setState({ userId: user.id });
+    });
+  }
+
   public render() {
+    if (!this.state) {
+      return null;
+    }
+
+    const { userId } = this.state;
+
     return (
       <div>
         <div className={header}>
@@ -33,15 +55,15 @@ export default class LootBox extends React.Component {
           <h1>Your Loot Box</h1>
         </div>
         <div className={lootBox}>
-          <Query query={lootBoxesQuery} variables={{ id: "#1" }}>
+          <Query query={lootBoxesQuery} variables={{ userId }}>
             {({ loading, error, data }) => {
-              if (loading) return "loading...";
+              if (loading) return <div>Loading loot boxes...</div>;
 
               if (error) return `Error! ${error}`;
 
               return data.user.lootboxes.map((lootBox: ILootBox) => (
-                <div>
-                  <MyLootBox lootBox={lootBox} />
+                <div className={lootBoxContainer} key={lootBox.id}>
+                  <MyLootBox lootBox={lootBox} key={lootBox.id} />
                 </div>
               ));
             }}

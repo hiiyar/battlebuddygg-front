@@ -60,13 +60,13 @@ export default class MyLootBox extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const lootBox = this.props.lootBox.lootbox;
+    const { lootBox } = this.props;
     const { openLootBox } = this.state;
 
     return (
       <div className={myLootBox}>
         <div className={title}>{lootBox.name}</div>
-        <img className={box} src="/static/images/lootBox/box.png" alt={lootBox.name} />
+        <img className={box} src={lootBox.icons[2].url} alt={lootBox.name} />
         <div className={button}>
           <Button style="bright" text="Claim" onClick={this.openLootBox.bind(this, true)} />
         </div>

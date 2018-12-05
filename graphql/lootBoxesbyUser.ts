@@ -1,17 +1,19 @@
 import gql from "graphql-tag";
 
 export default gql`
-  query lootBoxes($id: String) {
-    user(id: $id) {
+  query lootBoxes($userId: String) {
+    user(id: $userId) {
       lootboxes {
-        lootbox {
+        id
+        name
+        icons {
+          url
+        }
+        items {
           id
           name
-          items {
-            item {
-              id
-              name
-            }
+          icons {
+            url
           }
         }
       }
