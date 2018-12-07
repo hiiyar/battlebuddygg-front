@@ -9,7 +9,8 @@ export default gql`
       matches
       index
       icons {
-        url
+        name
+        extension
       }
     }
   }

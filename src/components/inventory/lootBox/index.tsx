@@ -3,9 +3,9 @@ import { css } from "emotion";
 import MyLootBox from "./myLootBox";
 import { Query } from "react-apollo";
 import lootBoxesQuery from "../../../../graphql/lootBoxesbyUser";
-import { ILootBox } from "../../../interfaces/lootBox";
 import authService from "../../../services/auth";
 import { IUser } from "../../../interfaces/user";
+import { IInventory } from "../../../interfaces/lootBox";
 
 interface IState {
   userId: string;
@@ -61,9 +61,9 @@ export default class LootBox extends React.Component<{}, IState> {
 
               if (error) return `Error! ${error}`;
 
-              return data.user.lootboxes.map((lootBox: ILootBox) => (
-                <div className={lootBoxContainer} key={lootBox.id}>
-                  <MyLootBox lootBox={lootBox} key={lootBox.id} />
+              return data.user.inventory.map((inventory: IInventory, index: number) => (
+                <div className={lootBoxContainer} key={inventory.lootbox.id}>
+                  <MyLootBox inventory={inventory} key={index} />
                 </div>
               ));
             }}

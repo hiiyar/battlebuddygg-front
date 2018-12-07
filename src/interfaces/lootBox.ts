@@ -1,5 +1,12 @@
 import { IIcon } from "./icons";
 
+export interface IInventory {
+  id: string;
+  open_time?: string;
+  server_time?: string;
+  lootbox: ILootBox;
+}
+
 export interface ILootBox {
   id: string;
   name: string;

@@ -1,6 +1,11 @@
 import * as React from "react";
 import LootBoxItem from "./item";
 import { css } from "emotion";
+import { IItems } from "../../../interfaces/lootBox";
+
+interface IProps {
+  items: IItems[];
+}
 
 const lootBoxItems = css`
   display: grid;
@@ -12,20 +17,13 @@ const lootBoxItems = css`
   margin: 40px 0;
 `;
 
-export default class LootBoxItems extends React.Component {
+export default class LootBoxItems extends React.Component<IProps> {
   public render() {
     return (
       <div className={lootBoxItems}>
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
-        <LootBoxItem />
+        {this.props.items.map((item: IItems, index: number) => (
+          <LootBoxItem item={item} key={index} />
+        ))}
       </div>
     );
   }
