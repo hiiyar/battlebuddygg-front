@@ -8,6 +8,7 @@ interface IProps {
   title?: string;
   width?: string | number;
   padding?: string | number;
+  hideCloseButton?: boolean;
 }
 
 const modal = css`

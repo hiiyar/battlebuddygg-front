@@ -57,6 +57,9 @@ const selectedItem = css`
     margin: 30px 0 0;
     padding: 20px;
   }
+  img {
+    width: 100%;
+  }
 `;
 
 export default class MyLootBox extends React.Component<IProps, IState> {
@@ -77,10 +80,6 @@ export default class MyLootBox extends React.Component<IProps, IState> {
 
     let serverTime: Date = new Date(inventory.server_time);
     const openTime: Date = new Date(inventory.open_time);
-
-    // Tests
-    // let serverTime: Date = new Date();
-    // const openTime: Date = new Date(new Date().setMilliseconds(10000));
 
     const interval = setInterval(() => {
       const difference: number = openTime.getTime() - serverTime.getTime();
@@ -135,6 +134,7 @@ export default class MyLootBox extends React.Component<IProps, IState> {
         rxjsOperators.loader()
       )
       .subscribe(() => {
+        console.log("close modal");
         this.onClose;
       });
   };
@@ -143,6 +143,7 @@ export default class MyLootBox extends React.Component<IProps, IState> {
     const selectedItem = this.props.inventory.lootbox.items.find(
       item => item.id === selectedItemId
     );
+
     this.setState({ showSelectedItem: true, selectedItem });
   };
 
