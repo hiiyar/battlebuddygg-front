@@ -42,6 +42,7 @@ injectGlobal`
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
       background: rgba(0, 0, 0, 0.5);
+  }
   input {
     margin: 10px 0;
     padding: 10px 20px;

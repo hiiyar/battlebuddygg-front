@@ -2,7 +2,7 @@ import * as React from "react";
 import BoostUp from "./boostUp";
 import BuyBoost from "./buyBoost";
 import { css } from "emotion";
-import boostQuery from "../../../../graphql/boost";
+import boostQuery from "../../../../graphql/queries/boost";
 import { Query } from "react-apollo";
 import { IBoost } from "../../../interfaces/boost";
 

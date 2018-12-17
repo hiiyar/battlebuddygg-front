@@ -5,6 +5,9 @@ import { css } from "emotion";
 interface IProps {
   isShown: boolean;
   onClose: Function;
+  title?: string;
+  width?: string | number;
+  padding?: string | number;
 }
 
 const modal = css`
@@ -24,6 +27,7 @@ const modal = css`
       text-transform: uppercase;
       font-weight: 900;
       font-size: 30px;
+      line-height: 100%;
       &:after {
         content: "";
         background: linear-gradient(52deg, #75ebd6 8%, #0093e9 100%);
@@ -39,8 +43,8 @@ const modal = css`
       border-radius: 50%;
       width: 40px;
       height: 40px;
-      bottom: 75px;
-      left: 213px;
+      bottom: 88px;
+      left: 31%;
       svg {
         fill: #fff !important;
       }
@@ -67,12 +71,13 @@ export default class Modal extends React.Component<IProps> {
       <Dialog
         isShown={this.props.isShown}
         onCloseComplete={this.handleClose}
-        title="BattleBuddy Loot"
+        title={this.props.title || "BattleBuddy"}
         hasFooter={false}
-        width={"80%"}
+        width={this.props.width || "80%"}
         topOffset={25}
         containerProps={{
           className: modal,
+          style: { padding: this.props.padding },
         }}
       >
         <span>{this.props.children}</span>

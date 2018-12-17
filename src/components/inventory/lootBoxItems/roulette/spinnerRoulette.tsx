@@ -108,8 +108,8 @@ export default class SpinnerRoulette extends React.Component<IProps, IState> {
         <div className={roulette}>
           <div className={`${rouletteContainer} ${spinRoulette ? spinRouletteAction : ""}`}>
             <div className={rouletteContent}>
-              {rouletteItems.map((item: IItems) => (
-                <div className={rouletteItem}>
+              {rouletteItems.map((item: IItems, index: number) => (
+                <div className={rouletteItem} key={index}>
                   <img className={rouletteItemImage} src={item.icons[2].url} title={item.name} />
                 </div>
               ))}

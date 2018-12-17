@@ -5,8 +5,10 @@ export default gql`
     user(id: $userId) {
       inventory {
         id
+        status
         open_time
         server_time
+        selected_item
         lootbox {
           id
           name

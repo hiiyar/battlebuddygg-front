@@ -6,7 +6,8 @@ import LootBoxItems from "../lootBoxItems/index";
 import Roulette from "../lootBoxItems/roulette/index";
 import lootBoxService from "../../../services/lootBoxService";
 import rxjsOperators from "../../../rxjs-operators";
-import { IItems, IInventory } from "../../../interfaces/lootBox";
+import { IInventory } from "../../../interfaces/lootBox";
+import { IItems } from "../../../interfaces/lootBox";
 
 export interface IProps {
   inventory: IInventory;
@@ -15,6 +16,8 @@ export interface IProps {
 export interface IState {
   canOpenLootBox: boolean;
   openLootBox: boolean;
+  showSelectedItem: boolean;
+  selectedItem: IItems;
   timer: string;
 }
 
@@ -48,11 +51,25 @@ const button = css`
   top: 45px;
 `;
 
+const selectedItem = css`
+  button {
+    width: 100%;
+    margin: 30px 0 0;
+    padding: 20px;
+  }
+`;
+
 export default class MyLootBox extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
 
-    this.state = { openLootBox: false, timer: null, canOpenLootBox: false };
+    this.state = {
+      openLootBox: false,
+      timer: null,
+      canOpenLootBox: false,
+      showSelectedItem: false,
+      selectedItem: null,
+    };
   }
 
   componentDidMount() {
@@ -90,7 +107,7 @@ export default class MyLootBox extends React.Component<IProps, IState> {
     }, 1000);
   }
 
-  openLootBox = () => {
+  showLootBox = () => {
     const { canOpenLootBox } = this.state;
 
     if (canOpenLootBox) {
@@ -104,7 +121,29 @@ export default class MyLootBox extends React.Component<IProps, IState> {
   };
 
   onClose = () => {
-    this.setState({ openLootBox: false });
+    this.setState({
+      openLootBox: false,
+      showSelectedItem: false,
+    });
+  };
+
+  openLootBox = () => {
+    lootBoxService
+      .openLootBox(this.props.inventory.id)
+      .pipe(
+        rxjsOperators.take(1),
+        rxjsOperators.loader()
+      )
+      .subscribe(() => {
+        this.onClose;
+      });
+  };
+
+  showSelectedItem = (selectedItemId: string) => {
+    const selectedItem = this.props.inventory.lootbox.items.find(
+      item => item.id === selectedItemId
+    );
+    this.setState({ showSelectedItem: true, selectedItem });
   };
 
   public render() {
@@ -116,12 +155,34 @@ export default class MyLootBox extends React.Component<IProps, IState> {
         <div className={title}>{inventory.lootbox.name}</div>
         <img className={box} src={inventory.lootbox.icons[2].url} alt={inventory.lootbox.name} />
         <div className={button}>
-          <Button style="bright" text={timer} onClick={this.openLootBox.bind(this, true)} />
+          <Button style="bright" text={timer} onClick={this.showLootBox.bind(this, true)} />
         </div>
 
-        <Modal isShown={openLootBox} onClose={this.onClose}>
-          <LootBoxItems items={inventory.lootbox.items} />
-          <Roulette />
+        <Modal
+          isShown={openLootBox}
+          onClose={this.onClose}
+          title={
+            this.state.showSelectedItem
+              ? `You got ${this.state.selectedItem.name}`
+              : "BattleBuddy Loot"
+          }
+          width={this.state.showSelectedItem ? "30%" : "80%"}
+          padding={this.state.showSelectedItem ? "0 5% 1%" : ""}
+        >
+          {!this.state.showSelectedItem ? (
+            <div>
+              <LootBoxItems items={inventory.lootbox.items} />
+              <Roulette
+                inventory={inventory}
+                onComplete={this.showSelectedItem.bind(this, inventory.selected_item)}
+              />
+            </div>
+          ) : (
+            <div className={selectedItem}>
+              <img src={this.state.selectedItem.icons[2].url} alt={this.state.selectedItem.name} />
+              <Button style="bright" text="Ok" onClick={this.openLootBox} />
+            </div>
+          )}
         </Modal>
       </div>
     );

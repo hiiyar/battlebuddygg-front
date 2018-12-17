@@ -2,9 +2,16 @@ import * as React from "react";
 import { css } from "emotion";
 import Button from "../../../shared/button";
 import SpinnerRoulette from "./spinnerRoulette";
+import lootBoxService from "../../../../services/lootBoxService";
+import { IInventory } from "../../../../interfaces/lootBox";
 
 interface IState {
   spinRoulette: boolean;
+}
+
+interface IProps {
+  inventory: IInventory;
+  onComplete: Function;
 }
 
 const getItem = css`
@@ -21,7 +28,7 @@ const buttonGo = css`
   width: 18%;
 `;
 
-export default class Roulette extends React.Component<{}, IState> {
+export default class Roulette extends React.Component<IProps, IState> {
   constructor(props: any) {
     super(props);
     this.state = { spinRoulette: false };
@@ -29,6 +36,10 @@ export default class Roulette extends React.Component<{}, IState> {
 
   spinRoulette = () => {
     this.setState({ spinRoulette: true });
+
+    setTimeout(() => {
+      this.props.onComplete();
+    }, 9000);
   };
 
   public render() {

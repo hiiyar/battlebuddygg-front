@@ -1,8 +1,10 @@
 import * as rxjs from "rxjs";
 import { IItems } from "../interfaces/lootBox";
+import { IInventory } from "../interfaces/lootBox";
 import apiService, { ApiService } from "./api";
-import lootBoxRouletteItems from "../../graphql/lootBoxRouletteItems";
+import lootBoxRouletteItems from "../../graphql/queries/lootBoxRouletteItems";
 import rxjsOperators from "../rxjs-operators";
+import openLootBox from "../../graphql/mutations/openLootBox";
 
 export class LootBoxService {
   private rouletteItems$: rxjs.BehaviorSubject<IItems[]>;
@@ -17,6 +19,15 @@ export class LootBoxService {
       rxjsOperators.switchMap((rouletteItems: IItems[]) => {
         this.rouletteItems$.next(rouletteItems);
         return this.rouletteItems$;
+      })
+    );
+  }
+
+  public openLootBox(idUserLootBox: string): rxjs.Observable<IInventory> {
+    return this.api.mutation(openLootBox, { idUserLootBox }).pipe(
+      rxjsOperators.map(inventory => inventory.openLootbox),
+      rxjsOperators.switchMap((inventory: IInventory) => {
+        return rxjs.of(inventory);
       })
     );
   }

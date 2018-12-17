@@ -2,10 +2,10 @@ import * as React from "react";
 import { css } from "emotion";
 import MyLootBox from "./myLootBox";
 import { Query } from "react-apollo";
-import lootBoxesQuery from "../../../../graphql/lootBoxesbyUser";
 import authService from "../../../services/auth";
 import { IUser } from "../../../interfaces/user";
-import { IInventory } from "../../../interfaces/lootBox";
+import { IInventory, enLootBoxStatus } from "../../../interfaces/lootBox";
+import lootBoxesbyUser from "../../../../graphql/queries/lootBoxesbyUser";
 
 interface IState {
   userId: string;
@@ -55,17 +55,19 @@ export default class LootBox extends React.Component<{}, IState> {
           <h1>Your Loot Box</h1>
         </div>
         <div className={lootBox}>
-          <Query query={lootBoxesQuery} variables={{ userId }}>
+          <Query query={lootBoxesbyUser} variables={{ userId }}>
             {({ loading, error, data }) => {
               if (loading) return <div>Loading loot boxes...</div>;
 
               if (error) return `Error! ${error}`;
 
-              return data.user.inventory.map((inventory: IInventory, index: number) => (
-                <div className={lootBoxContainer} key={inventory.lootbox.id}>
-                  <MyLootBox inventory={inventory} key={index} />
-                </div>
-              ));
+              return data.user.inventory
+                .filter((inventory: IInventory) => inventory.status === enLootBoxStatus.CLOSED)
+                .map((inventory: IInventory, index: number) => (
+                  <div className={lootBoxContainer} key={index}>
+                    <MyLootBox inventory={inventory} key={index} />
+                  </div>
+                ));
             }}
           </Query>
         </div>

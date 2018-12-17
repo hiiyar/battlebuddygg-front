@@ -3,7 +3,7 @@ import { IUser, ILoginResponse } from "../interfaces/user";
 import apiService, { ApiService } from "./api";
 import tokenService, { TokenService } from "./token";
 import rxjsOperators from "../rxjs-operators";
-import login from "../../graphql/login";
+import login from "../../graphql/queries/login";
 
 export class AuthService {
   private user$: rxjs.Observable<Readonly<IUser>>;
