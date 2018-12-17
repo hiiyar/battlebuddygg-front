@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const modal = css`
-  background-color: #252e54;
+  background-color: #252e54 !important;
   border-image: linear-gradient(52deg, #75ebd6 8%, #0093e9 100%);
   border-image-slice: 1;
   border-width: 3px;
