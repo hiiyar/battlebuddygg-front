@@ -131,7 +131,7 @@ export default class Login extends React.Component<{}, IState> {
       .login(this.state.email, this.state.password)
       .pipe(rxjsOperators.loader())
       .subscribe(() => {
-        Router.push("/");
+        Router.push("/inventory");
       });
   };
 

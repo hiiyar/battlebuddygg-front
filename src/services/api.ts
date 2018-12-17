@@ -1,5 +1,5 @@
 import * as rxjs from "rxjs";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { API_ENDPOINT } from "../settings";
 import tokenService, { TokenService } from "./token";
 import rxjsOperators from "../rxjs-operators";
@@ -18,6 +18,20 @@ export class ApiService {
       rxjsOperators.switchMap(() => {
         return this.apolloClient.query({
           query,
+          variables,
+        });
+      }),
+      rxjsOperators.map((res: any) => res.data),
+      rxjsOperators.catchError(err => this.handleError(err))
+    );
+  }
+
+  public mutation(mutation: any, variables?: any): rxjs.Observable<any> {
+    return this.tokenService.getToken().pipe(
+      rxjsOperators.first(),
+      rxjsOperators.switchMap(() => {
+        return this.apolloClient.mutate({
+          mutation,
           variables,
         });
       }),

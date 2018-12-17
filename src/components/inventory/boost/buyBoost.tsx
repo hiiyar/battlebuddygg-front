@@ -55,7 +55,10 @@ export default class BuyBoost extends React.Component<IProps> {
     return (
       <div className={buyBoost}>
         <div className={buyBoostIconWrapper}>
-          <img src={boost.icons[2].url} alt={boost.name} />
+          <img
+            src={`/static/images/boost/${boost.icons[2].name}.${boost.icons[2].extension}`}
+            alt={boost.name}
+          />
         </div>
         <div className={title}>{boost.name}</div>
         <div className={matches}>{boost.matches} matches</div>
